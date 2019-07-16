@@ -62,22 +62,34 @@
   &__picture {
     background-size: cover;
     height: 23rem;
-    background-blend-mode: overlay;
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+
+    @supports (background-blend-mode: overlay) {
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      background-blend-mode: overlay;
+    }
 
     &--1 {
-      background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark),
+      background-image: linear-gradient(
+                      to right bottom,
+                      rgba($color-secondary-light, 0.8),
+                      rgba($color-secondary-dark, 0.8)),
       url("../img/nat-5.jpg");
     }
 
     &--2 {
-      background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark),
+      background-image: linear-gradient(
+                      to right bottom,
+                      rgba($color-primary-light, 0.8),
+                      rgba($color-primary-dark, 0.8)),
       url("../img/nat-6.jpg");
     }
 
     &--3 {
-      background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark),
+      background-image: linear-gradient(
+                      to right bottom,
+                      rgba($color-tertiary-light, 0.8),
+                      rgba($color-tertiary-dark, 0.8)),
       url("../img/nat-7.jpg");
     }
   }
@@ -163,7 +175,9 @@
     font-weight: 100;
   }
 
-  @include respond(tab-port) {
+  //@include respond(tab-port) {
+  @media only screen and (max-width: 56.25em),
+  only screen and (hover: none) {
     height: auto;
     border-radius: 3px;
     overflow: hidden;
