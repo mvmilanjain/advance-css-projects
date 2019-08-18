@@ -1,0 +1,44 @@
+// MEDIA QUERY MANAGER
+/*
+
+1em - 16px
+*/
+
+@mixin respond($bp) {
+  @if ($bp == x-small) {
+    @media only screen and (max-width: 31.25em) {
+      @content
+    }
+  }
+
+  @if ($bp == small) {
+    @media only screen and (max-width: 37.5em) {
+      @content
+    }
+  }
+
+  @if ($bp == medium) {
+    @media only screen and (max-width: 56.25em) {
+      @content
+    }
+  }
+
+  @if ($bp == large) {
+    @media only screen and (max-width: 68.75em) {
+      @content
+    }
+  }
+
+  @if ($bp == largest) {
+    @media only screen and (max-width: 75em) {
+      @content
+    }
+  }
+
+  @if ($bp == big-desktop) {
+    @media only screen and (min-width: 112.5em) {
+      @content
+    }
+  }
+
+}
