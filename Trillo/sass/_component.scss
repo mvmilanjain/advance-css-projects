@@ -10,6 +10,12 @@
   justify-content: center;
   align-items: center;
 
+  @include respond(x-small) {
+    order: 1;
+    flex: 0 0 100%;
+    background-color: var(--color-grey-light-2);
+  }
+
   &__input {
     font-family: inherit;
     font-size: inherit;
@@ -123,14 +129,25 @@
   list-style: none;
   margin-top: 3.5rem;
 
-  &__item {
+  @include respond(medium) {
     display: flex;
-    margin-bottom: .5rem;
+    margin: 0;
+  }
+
+  &__item {
     position: relative;
     transition: background-color .3s;
 
-    &:first-child {
-      background-color: var(--color-primary);
+    &:not(:last-child) {
+      margin-bottom: .5rem;
+
+      @include respond(medium) {
+        margin-bottom: 0;
+      }
+    }
+
+    @include respond(medium) {
+      flex: 1;
     }
   }
 
@@ -139,14 +156,15 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: .3rem;
+    width: 3px;
     height: 100%;
     background-color: var(--color-primary);
     transform: scaleY(0);
     transition: transform .2s, width .4s cubic-bezier(1, 0, 0, 1) .2s, background-color .1s;
   }
 
-  &__item:hover::before {
+  &__item:hover::before,
+  &__item--active::before {
     transform: scaleY(1);
     width: 100%;
   }
@@ -160,9 +178,20 @@
     text-decoration: none;
     text-transform: uppercase;
     padding: 1.5rem 3rem;
+    position: relative;
     z-index: 10;
     display: flex;
     align-items: center;
+
+    @include respond(medium) {
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    @include respond(small) {
+      flex-direction: column;
+      padding: 1.5rem .5rem;
+    }
   }
 
   &__icon {
@@ -170,6 +199,13 @@
     height: 1.75rem;
     margin-right: 2rem;
     fill: currentColor;
+
+    @include respond(small) {
+      margin-right: 0;
+      margin-bottom: .7rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 }
 
@@ -179,6 +215,10 @@
   color: var(--color-grey-light-4);
   text-align: center;
   padding: 2.5rem;
+
+  @include respond(medium) {
+    display: none;
+  }
 }
 
 //-------------------- GALLERY----------------------
@@ -203,6 +243,11 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     padding: 1.5rem 3rem;
+
+    @include respond(small) {
+      font-size: 1.8rem;
+      padding: 1.25rem 2rem;
+    }
   }
 
   &__stars {
@@ -238,15 +283,27 @@
     justify-content: center;
     align-items: center;
 
+    @include respond(small) {
+      padding: 0 1.5rem;
+    }
+
     &-average {
       font-size: 2.25rem;
       font-weight: 300;
+
+      @include respond(small) {
+        font-size: 1.8rem;
+      }
     }
 
     &-count {
       font-size: .8rem;
       text-transform: uppercase;
       margin-bottom: -3px;
+
+      @include respond(small) {
+        font-size: .5rem;
+      }
     }
   }
 }
@@ -298,12 +355,17 @@
       display: inline-block;
       margin-right: .7rem;
 
-      background-color: var(--color-primary);
-      background-image: none;
-      -webkit-mask-image: url(../img/chevron-thin-right.svg);
-      -webkit-mask-size: cover;
-      mask-image: url(../img/chevron-thin-right.svg);
-      mask-size: cover;
+      background-image: url(../img/chevron-thin-right.svg);
+      background-size: cover;
+
+      @supports (-webkit-mask-image: url(../img/chevron-thin-right.svg)) or (mask-image: url(../img/chevron-thin-right.svg)) {
+        background-color: var(--color-primary);
+        background-image: none;
+        -webkit-mask-image: url(../img/chevron-thin-right.svg);
+        -webkit-mask-size: cover;
+        mask-image: url(../img/chevron-thin-right.svg);
+        mask-size: cover;
+      }
     }
   }
 }
@@ -342,6 +404,11 @@
   box-shadow: var(--shadow-light);
   padding: 3rem;
   margin-bottom: 3.5rem;
+
+  @include respond(medium) {
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+  }
 
   position: relative;
   overflow: hidden;
@@ -402,6 +469,10 @@
 .cta {
   padding: 3.5rem 0;
   text-align: center;
+
+  @include respond(medium) {
+    padding: 2.5rem 0;
+  }
 
   &__book-now {
     font-size: 2rem;
